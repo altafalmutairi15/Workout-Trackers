@@ -92,7 +92,6 @@
 
         .container { padding: 16px; }
 
-        /* Warm-up Button Style */
         .warmup-card {
             background: linear-gradient(45deg, #1c1c1f, #2a2a2e);
             border-radius: 16px;
@@ -108,13 +107,13 @@
             gap: 10px;
             background: var(--accent);
             color: #000;
-            text-decoration: none;
+            border: none;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 800;
             font-size: 14px;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
         }
 
         .exercise-card {
@@ -139,18 +138,19 @@
             max-width: 70%;
         }
 
-        .tutorial-link {
+        .tutorial-btn {
             background: #333;
             color: #fff;
             padding: 8px 12px;
             border-radius: 8px;
             font-size: 11px;
-            text-decoration: none;
+            border: none;
             font-weight: 600;
             text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 4px;
+            cursor: pointer;
         }
 
         .notes-area {
@@ -187,7 +187,6 @@
         }
 
         .round-row.completed { opacity: 0.3; filter: grayscale(1); }
-
         .round-num { font-weight: 800; color: var(--text-dim); text-align: center; }
 
         input[type="number"] {
@@ -211,9 +210,7 @@
 
         .timer-panel {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: #1c1c1f;
             border-top: 2px solid var(--accent);
             padding: 15px 20px 30px 20px;
@@ -221,14 +218,12 @@
             flex-direction: column;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 -10px 20px rgba(0,0,0,0.4);
         }
 
         .timer-display {
             font-size: 36px;
             font-weight: 800;
             margin-bottom: 10px;
-            font-variant-numeric: tabular-nums;
             color: var(--accent);
         }
 
@@ -296,9 +291,16 @@
 </div>
 
 <script>
-    // VIDEO REFS:
-    // Video 1 (Lower): https://www.youtube.com/shorts/I-4wVqB0mF8
-    // Video 2 (Upper): https://www.youtube.com/shorts/28SshS9A93I
+    // --- VIDEO OPENER FIX ---
+    function watchVideo(url) {
+        if (!url) return;
+        // This method is more reliable for "Home Screen" apps
+        const newWindow = window.open(url, '_blank');
+        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+            // Fallback if browser blocks popups
+            window.location.href = url;
+        }
+    }
 
     const workoutData = {
         1: {
@@ -390,9 +392,9 @@
         let html = `
             <div class="warmup-card">
                 <div style="margin-bottom: 12px; font-weight: 800; font-size: 14px; color: var(--text-dim);">PRE-WORKOUT</div>
-                <a href="${dayInfo.warmup}" target="_blank" class="warmup-btn">
+                <button onclick="watchVideo('${dayInfo.warmup}')" class="warmup-btn">
                     🔥 START ${dayInfo.warmupName}
-                </a>
+                </button>
             </div>
         `;
 
@@ -403,7 +405,7 @@
                 <div class="exercise-card">
                     <div class="exercise-header">
                         <h3 class="exercise-title">${ex.name}</h3>
-                        ${ex.link ? `<a href="${ex.link}" target="_blank" class="tutorial-link"><span>▶</span> Video</a>` : `<span class="tutorial-link" style="opacity:0.3">No Video</span>`}
+                        ${ex.link ? `<button onclick="watchVideo('${ex.link}')" class="tutorial-btn">▶ Video</button>` : `<span class="tutorial-btn" style="opacity:0.3">No Video</span>`}
                     </div>
                     <textarea class="notes-area" placeholder="Notes (Seat height, machine #, etc.)" 
                         oninput="saveData('${key}', 'notes', this.value)">${saved.notes || ''}</textarea>
@@ -455,7 +457,7 @@
     }
 
     function clearAllData() {
-        if(confirm("Are you sure? This will permanently delete all weights, reps, and notes for the week.")) {
+        if(confirm("Are you sure? This will delete all weights and notes for the week.")) {
             localStorage.removeItem('profit_data_v2');
             userSettings = {};
             renderWorkout(currentDay);
@@ -476,7 +478,7 @@
             document.getElementById('timerControl').innerText = "PAUSE";
             timerInterval = setInterval(() => {
                 secondsLeft--; updateTimerDisplay();
-                if (secondsLeft <= 0) { clearInterval(timerInterval); alert("Rest over! Get back to your set."); resetTimer(); }
+                if (secondsLeft <= 0) { clearInterval(timerInterval); alert("Rest over!"); resetTimer(); }
             }, 1000);
         }
         isRunning = !isRunning;
