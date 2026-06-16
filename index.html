@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ProFit Tracker</title>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -16,39 +15,35 @@
             --input-bg: #2a2a2e;
             --text-main: #ffffff;
             --text-dim: #a1a1aa;
-            --day1: #ff7eb9; /* Pink */
-            --day2: #70d6ff; /* Light Blue */
-            --day3: #be95ff; /* Purple */
-            --day4: #ffd460; /* Yellow */
-            --day5: #63f5aa; /* Green */
+            --day1: #ff7eb9; 
+            --day2: #70d6ff; 
+            --day3: #be95ff; 
+            --day4: #ffd460; 
+            --day5: #63f5aa; 
             --accent: var(--day1);
             --transition: all 0.2s ease;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 0;
-            padding-bottom: 100px; /* Space for timer */
+            padding-bottom: 160px; 
             line-height: 1.5;
             overscroll-behavior-y: contain;
         }
 
-        /* Header & Navigation */
         header {
             padding: 20px 16px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+            background: rgba(18, 18, 20, 0.95);
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid #2a2a2e;
         }
 
         .day-selector {
@@ -79,10 +74,9 @@
             background: var(--accent);
         }
 
-        /* Progress Bar */
         .progress-container {
-            margin: 10px 16px;
-            height: 8px;
+            margin-top: 15px;
+            height: 6px;
             background: #2a2a2e;
             border-radius: 10px;
             overflow: hidden;
@@ -96,9 +90,31 @@
             box-shadow: 0 0 10px var(--accent);
         }
 
-        /* Exercise Cards */
-        .container {
-            padding: 0 16px;
+        .container { padding: 16px; }
+
+        /* Warm-up Button Style */
+        .warmup-card {
+            background: linear-gradient(45deg, #1c1c1f, #2a2a2e);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid var(--accent);
+            text-align: center;
+        }
+
+        .warmup-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #000;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .exercise-card {
@@ -112,7 +128,7 @@
         .exercise-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 12px;
         }
 
@@ -120,18 +136,21 @@
             font-size: 18px;
             font-weight: 800;
             margin: 0;
+            max-width: 70%;
         }
 
-        .tutorial-btn {
+        .tutorial-link {
             background: #333;
-            color: var(--text-dim);
-            border: none;
-            padding: 6px 12px;
+            color: #fff;
+            padding: 8px 12px;
             border-radius: 8px;
             font-size: 11px;
             text-decoration: none;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .notes-area {
@@ -140,22 +159,23 @@
             border: 1px solid #333;
             border-radius: 8px;
             color: var(--text-main);
-            padding: 8px;
+            padding: 10px;
             font-size: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            font-family: inherit;
             resize: none;
         }
 
-        /* Rounds Table */
         .rounds-header {
             display: grid;
             grid-template-columns: 40px 1fr 1fr 50px;
             gap: 10px;
             color: var(--text-dim);
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 800;
             margin-bottom: 8px;
-            padding-left: 5px;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         .round-row {
@@ -163,95 +183,86 @@
             grid-template-columns: 40px 1fr 1fr 50px;
             gap: 10px;
             align-items: center;
-            margin-bottom: 8px;
-            transition: opacity 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        .round-row.completed {
-            opacity: 0.4;
-        }
+        .round-row.completed { opacity: 0.3; filter: grayscale(1); }
 
-        .round-row.completed input {
-            text-decoration: line-through;
-        }
-
-        .round-num {
-            font-weight: 600;
-            color: var(--text-dim);
-        }
+        .round-num { font-weight: 800; color: var(--text-dim); text-align: center; }
 
         input[type="number"] {
             background: var(--input-bg);
             border: 1px solid #444;
             color: #fff;
-            padding: 10px;
+            padding: 12px 5px;
             border-radius: 8px;
             width: 100%;
             font-size: 16px;
             text-align: center;
+            font-weight: 600;
         }
 
         input[type="checkbox"] {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
             accent-color: var(--accent);
             cursor: pointer;
         }
 
-        /* Floating Timer */
         .timer-panel {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: #1e1e22;
-            border: 2px solid var(--accent);
-            border-radius: 20px;
-            padding: 15px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1c1c1f;
+            border-top: 2px solid var(--accent);
+            padding: 15px 20px 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 1000;
+            box-shadow: 0 -10px 20px rgba(0,0,0,0.4);
         }
 
         .timer-display {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
             margin-bottom: 10px;
             font-variant-numeric: tabular-nums;
+            color: var(--accent);
         }
 
         .timer-controls {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
+            max-width: 500px;
         }
 
         .timer-btn {
             flex: 1;
-            padding: 8px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             border: none;
             background: #333;
             color: white;
-            font-weight: 600;
+            font-weight: 800;
             font-size: 12px;
-            cursor: pointer;
         }
 
         .timer-btn.start { background: var(--accent); color: #000; }
-        .timer-btn.stop { background: #ff4d4d; }
+        .timer-btn.reset { background: #444; }
 
-        /* Hidden Utility */
-        .hidden { display: none; }
-
-        /* Custom scrollbar for desktop testing */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        .reset-all {
+            display: block;
+            margin: 40px auto;
+            background: transparent;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -269,83 +280,94 @@
     </div>
 </header>
 
-<div class="container" id="workoutContent">
-    <!-- Exercises will be injected here by JavaScript -->
-</div>
+<div class="container" id="workoutContent"></div>
 
-<div class="timer-panel" id="timerPanel">
+<button class="reset-all" onclick="clearAllData()">Reset All Weekly Data</button>
+
+<div class="timer-panel">
     <div class="timer-display" id="timerDisplay">01:30</div>
     <div class="timer-controls">
         <button class="timer-btn" onclick="setTimer(60)">60s</button>
         <button class="timer-btn" onclick="setTimer(90)">90s</button>
         <button class="timer-btn" onclick="setTimer(120)">120s</button>
         <button class="timer-btn start" id="timerControl" onclick="toggleTimer()">START</button>
-        <button class="timer-btn stop" onclick="resetTimer()">RESET</button>
+        <button class="timer-btn reset" onclick="resetTimer()">RESET</button>
     </div>
 </div>
 
 <script>
-    // --- WORKOUT DATA ---
+    // VIDEO REFS:
+    // Video 1 (Lower): https://www.youtube.com/shorts/I-4wVqB0mF8
+    // Video 2 (Upper): https://www.youtube.com/shorts/28SshS9A93I
+
     const workoutData = {
         1: {
             color: '#ff7eb9',
+            warmup: "https://www.youtube.com/shorts/I-4wVqB0mF8",
+            warmupName: "6 Min Legs Warm Up",
             exercises: [
-                { name: "Barbell Hip Thrusts", rounds: 3, link: "https://www.youtube.com/results?search_query=barbell+hip+thrust+form" },
-                { name: "Leg Press", rounds: 3, link: "https://www.youtube.com/results?search_query=leg+press+form" },
-                { name: "Leg Extensions", rounds: 3, link: "https://www.youtube.com/results?search_query=leg+extension+form" },
-                { name: "Seated Leg Curl", rounds: 3, link: "https://www.youtube.com/results?search_query=seated+leg+curl+form" },
-                { name: "Cable Crunch", rounds: 3, link: "https://www.youtube.com/results?search_query=cable+crunch+form" }
+                { name: "Barbell Hip Thrusts", rounds: 3, link: "https://www.youtube.com/shorts/Lp6VjVmsXf0" },
+                { name: "Leg Press", rounds: 3, link: "https://www.youtube.com/shorts/TfA1G7T-8bA" },
+                { name: "Leg Extensions", rounds: 3, link: "https://www.youtube.com/shorts/v_R6bO4B8o0" },
+                { name: "Seated Leg Curl", rounds: 3, link: "https://www.youtube.com/shorts/00bS_S_C2T4" },
+                { name: "Cable Crunch", rounds: 3, link: "https://www.youtube.com/shorts/2f3T6f8D_9o" }
             ]
         },
         2: {
             color: '#70d6ff',
+            warmup: "https://www.youtube.com/shorts/28SshS9A93I",
+            warmupName: "Upper Body Mobility",
             exercises: [
-                { name: "Seated Cable Row", rounds: 3, link: "https://www.youtube.com/results?search_query=seated+cable+row+form" },
-                { name: "Lat Pulldown", rounds: 3, link: "https://www.youtube.com/results?search_query=lat+pulldown+form" },
-                { name: "Dumbbell Chest Press", rounds: 3, link: "https://www.youtube.com/results?search_query=dumbbell+chest+press+form" },
-                { name: "Cable Rope Upright Row", rounds: 3, link: "" },
-                { name: "Standing Bicep Cable Curl", rounds: 3, link: "https://www.youtube.com/results?search_query=standing+cable+bicep+curl+form" },
-                { name: "Dumbbell Skull Crushers", rounds: 3, link: "https://www.youtube.com/results?search_query=dumbbell+skull+crushers+form" }
+                { name: "Seated Cable Row", rounds: 3, link: "https://www.youtube.com/shorts/3V6yTqY2FvI" },
+                { name: "Lat Pulldown", rounds: 3, link: "https://www.youtube.com/shorts/CAwf7n6Luuc" },
+                { name: "Dumbbell Chest Press", rounds: 3, link: "https://www.youtube.com/shorts/VmBy8T79V8c" },
+                { name: "Cable Rope Upright Row", rounds: 3, link: "https://www.youtube.com/shorts/Vp9e_R_V06o" },
+                { name: "Standing Bicep Cable Curl", rounds: 3, link: "https://www.youtube.com/shorts/AsAVbBko26w" },
+                { name: "Dumbbell Skull Crushers", rounds: 3, link: "https://www.youtube.com/shorts/R4p8P_k4YmY" }
             ]
         },
         3: {
             color: '#be95ff',
+            warmup: "https://www.youtube.com/shorts/I-4wVqB0mF8",
+            warmupName: "6 Min Legs Warm Up",
             exercises: [
-                { name: "Barbell Stiff Leg Deadlift", rounds: 3, link: "https://www.youtube.com/results?search_query=stiff+leg+deadlift+form" },
-                { name: "Leg Press", rounds: 3, link: "https://www.youtube.com/results?search_query=leg+press+form" },
-                { name: "Dumbbell Goblet Squat", rounds: 3, link: "https://www.youtube.com/results?search_query=goblet+squat+form" },
-                { name: "Seated Machine Calf Raises", rounds: 3, link: "https://www.youtube.com/results?search_query=machine+calf+raises+form" },
-                { name: "Lying Leg Raises", rounds: 3, link: "https://www.youtube.com/results?search_query=lying+leg+raises+form" }
+                { name: "Barbell Stiff Leg Deadlift", rounds: 3, link: "https://www.youtube.com/shorts/jTMm7T6Z6vM" },
+                { name: "Leg Press", rounds: 3, link: "https://www.youtube.com/shorts/TfA1G7T-8bA" },
+                { name: "Dumbbell Goblet Squat", rounds: 3, link: "https://www.youtube.com/shorts/MeIiIdbaSjU" },
+                { name: "Seated Machine Calf Raises", rounds: 3, link: "https://www.youtube.com/shorts/JbyjN744PrU" },
+                { name: "Lying Leg Raises", rounds: 3, link: "https://www.youtube.com/shorts/JB2oyawG9KI" }
             ]
         },
         4: {
             color: '#ffd460',
+            warmup: "https://www.youtube.com/shorts/28SshS9A93I",
+            warmupName: "Upper Body Mobility",
             exercises: [
                 { name: "Machine Chest Press", rounds: 3, link: "" },
-                { name: "Single Arm Dumbbell Row", rounds: 3, link: "https://www.youtube.com/results?search_query=single+arm+dumbbell+row+form" },
-                { name: "Lat Pulldown", rounds: 3, link: "https://www.youtube.com/results?search_query=lat+pulldown+form" },
-                { name: "Seated Dumbbell Shoulder Press", rounds: 3, link: "https://www.youtube.com/results?search_query=dumbbell+shoulder+press+form" },
-                { name: "Cable Rope Pushdown", rounds: 3, link: "https://www.youtube.com/results?search_query=cable+rope+pushdown+form" },
-                { name: "Cable Rope Hammer Curls", rounds: 3, link: "https://www.youtube.com/results?search_query=cable+hammer+curls+form" }
+                { name: "Single Arm Dumbbell Row", rounds: 3, link: "https://www.youtube.com/shorts/dFzUjzfih7k" },
+                { name: "Lat Pulldown", rounds: 3, link: "https://www.youtube.com/shorts/CAwf7n6Luuc" },
+                { name: "Seated Dumbbell Shoulder Press", rounds: 3, link: "https://www.youtube.com/shorts/qEwKCR5JCog" },
+                { name: "Cable Rope Pushdown", rounds: 3, link: "https://www.youtube.com/shorts/vB5OHsJ3EME" },
+                { name: "Cable Rope Hammer Curls", rounds: 3, link: "https://www.youtube.com/shorts/P97U_XpA870" }
             ]
         },
         5: {
             color: '#63f5aa',
+            warmup: "https://www.youtube.com/shorts/I-4wVqB0mF8",
+            warmupName: "6 Min Legs Warm Up",
             exercises: [
-                { name: "Hip Thrust Machine", rounds: 3, link: "https://www.youtube.com/results?search_query=hip+thrust+machine+form" },
-                { name: "Dumbbell Bulgarian Split Squat", rounds: 3, link: "https://www.youtube.com/results?search_query=bulgarian+split+squat+form" },
-                { name: "Hack Squat", rounds: 3, link: "https://www.youtube.com/results?search_query=hack+squat+form" },
-                { name: "Seated Machine Calf Raises", rounds: 3, link: "https://www.youtube.com/results?search_query=machine+calf+raises+form" },
-                { name: "Decline Crunch", rounds: 3, link: "https://www.youtube.com/results?search_query=decline+crunch+form" }
+                { name: "Hip Thrust Machine", rounds: 3, link: "https://www.youtube.com/watch?v=9_pP-6P2L2A" },
+                { name: "Dumbbell Bulgarian Split Squat", rounds: 3, link: "https://www.youtube.com/shorts/2C-uNgKwPLE" },
+                { name: "Hack Squat", rounds: 3, link: "https://www.youtube.com/shorts/0tn5K9U_VNo" },
+                { name: "Seated Machine Calf Raises", rounds: 3, link: "https://www.youtube.com/shorts/JbyjN744PrU" },
+                { name: "Decline Crunch", rounds: 3, link: "https://www.youtube.com/shorts/OonL66uPZ78" }
             ]
         }
     };
 
-    // --- APP STATE ---
     let currentDay = 1;
-    let userSettings = JSON.parse(localStorage.getItem('profit_data')) || {};
+    let userSettings = JSON.parse(localStorage.getItem('profit_data_v2')) || {};
 
-    // --- CORE FUNCTIONS ---
     function init() {
         renderWorkout(currentDay);
         updateOverallProgress();
@@ -353,16 +375,9 @@
 
     function switchDay(dayNum) {
         currentDay = dayNum;
-        
-        // Update UI Tabs
-        document.querySelectorAll('.day-tab').forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.day == dayNum);
-        });
-
-        // Update Theme Color
+        document.querySelectorAll('.day-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.day == dayNum));
         const color = workoutData[dayNum].color;
         document.documentElement.style.setProperty('--accent', color);
-
         renderWorkout(dayNum);
         updateOverallProgress();
         window.scrollTo(0,0);
@@ -372,143 +387,103 @@
         const container = document.getElementById('workoutContent');
         const dayInfo = workoutData[day];
         
-        let html = '';
+        let html = `
+            <div class="warmup-card">
+                <div style="margin-bottom: 12px; font-weight: 800; font-size: 14px; color: var(--text-dim);">PRE-WORKOUT</div>
+                <a href="${dayInfo.warmup}" target="_blank" class="warmup-btn">
+                    🔥 START ${dayInfo.warmupName}
+                </a>
+            </div>
+        `;
+
         dayInfo.exercises.forEach((ex, exIdx) => {
-            const storageKey = `d${day}_e${exIdx}`;
-            const savedData = userSettings[storageKey] || { notes: '', rounds: [] };
-            
+            const key = `d${day}_e${exIdx}`;
+            const saved = userSettings[key] || { notes: '', rounds: [] };
             html += `
                 <div class="exercise-card">
                     <div class="exercise-header">
                         <h3 class="exercise-title">${ex.name}</h3>
-                        ${ex.link ? `<a href="${ex.link}" target="_blank" class="tutorial-btn">Tutorial</a>` : `<span class="tutorial-btn" style="opacity:0.5">No Video</span>`}
+                        ${ex.link ? `<a href="${ex.link}" target="_blank" class="tutorial-link"><span>▶</span> Video</a>` : `<span class="tutorial-link" style="opacity:0.3">No Video</span>`}
                     </div>
-                    
-                    <textarea class="notes-area" placeholder="Exercise Notes (Seat #, feel, etc...)" 
-                        oninput="saveData('${storageKey}', 'notes', this.value)">${savedData.notes || ''}</textarea>
-
-                    <div class="rounds-header">
-                        <span>SET</span>
-                        <span>WEIGHT</span>
-                        <span>REPS</span>
-                        <span>DONE</span>
-                    </div>
-
-                    <div class="rounds-list">
-                        ${Array.from({length: ex.rounds}).map((_, rIdx) => {
-                            const rData = (savedData.rounds && savedData.rounds[rIdx]) ? savedData.rounds[rIdx] : { w: '', r: '', done: false };
-                            const isDone = rData.done;
-                            return `
-                                <div class="round-row ${isDone ? 'completed' : ''}" id="row_${storageKey}_${rIdx}">
-                                    <span class="round-num">${rIdx + 1}</span>
-                                    <input type="number" inputmode="decimal" placeholder="-" 
-                                        value="${rData.w}" oninput="saveRoundData('${storageKey}', ${rIdx}, 'w', this.value)">
-                                    <input type="number" inputmode="numeric" placeholder="-" 
-                                        value="${rData.r}" oninput="saveRoundData('${storageKey}', ${rIdx}, 'r', this.value)">
-                                    <input type="checkbox" ${isDone ? 'checked' : ''} 
-                                        onclick="toggleRound('${storageKey}', ${rIdx}, this)">
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
-            `;
+                    <textarea class="notes-area" placeholder="Notes (Seat height, machine #, etc.)" 
+                        oninput="saveData('${key}', 'notes', this.value)">${saved.notes || ''}</textarea>
+                    <div class="rounds-header"><span>Set</span><span>Weight</span><span>Reps</span><span>Done</span></div>
+                    ${Array.from({length: ex.rounds}).map((_, rIdx) => {
+                        const rData = (saved.rounds && saved.rounds[rIdx]) ? saved.rounds[rIdx] : { w: '', r: '', done: false };
+                        return `
+                            <div class="round-row ${rData.done ? 'completed' : ''}" id="row_${key}_${rIdx}">
+                                <span class="round-num">${rIdx + 1}</span>
+                                <input type="number" inputmode="decimal" placeholder="-" value="${rData.w}" oninput="saveRoundData('${key}', ${rIdx}, 'w', this.value)">
+                                <input type="number" inputmode="numeric" placeholder="-" value="${rData.r}" oninput="saveRoundData('${key}', ${rIdx}, 'r', this.value)">
+                                <input type="checkbox" ${rData.done ? 'checked' : ''} onclick="toggleRound('${key}', ${rIdx}, this)">
+                            </div>
+                        `;
+                    }).join('')}
+                </div>`;
         });
         container.innerHTML = html;
     }
 
-    // --- DATA PERSISTENCE ---
     function saveData(key, field, value) {
         if (!userSettings[key]) userSettings[key] = { notes: '', rounds: [] };
         userSettings[key][field] = value;
-        localStorage.setItem('profit_data', JSON.stringify(userSettings));
+        localStorage.setItem('profit_data_v2', JSON.stringify(userSettings));
     }
 
     function saveRoundData(key, rIdx, field, value) {
         if (!userSettings[key]) userSettings[key] = { notes: '', rounds: [] };
         if (!userSettings[key].rounds[rIdx]) userSettings[key].rounds[rIdx] = { w: '', r: '', done: false };
         userSettings[key].rounds[rIdx][field] = value;
-        localStorage.setItem('profit_data', JSON.stringify(userSettings));
+        localStorage.setItem('profit_data_v2', JSON.stringify(userSettings));
     }
 
-    function toggleRound(key, rIdx, checkbox) {
+    function toggleRound(key, rIdx, cb) {
         const row = document.getElementById(`row_${key}_${rIdx}`);
-        const isChecked = checkbox.checked;
-        
-        if (!userSettings[key]) userSettings[key] = { notes: '', rounds: [] };
         if (!userSettings[key].rounds[rIdx]) userSettings[key].rounds[rIdx] = { w: '', r: '', done: false };
-        
-        userSettings[key].rounds[rIdx].done = isChecked;
-        row.classList.toggle('completed', isChecked);
-        
-        localStorage.setItem('profit_data', JSON.stringify(userSettings));
+        userSettings[key].rounds[rIdx].done = cb.checked;
+        row.classList.toggle('completed', cb.checked);
+        localStorage.setItem('profit_data_v2', JSON.stringify(userSettings));
         updateOverallProgress();
-
-        // Trigger brief vibration on mobile if supported
-        if (isChecked && window.navigator.vibrate) {
-            window.navigator.vibrate(50);
-        }
+        if (cb.checked && window.navigator.vibrate) window.navigator.vibrate(40);
     }
 
     function updateOverallProgress() {
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const total = checkboxes.length;
-        const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
-        const percentage = total > 0 ? (checked / total) * 100 : 0;
-        
-        document.getElementById('overallProgress').style.width = `${percentage}%`;
+        const dayChecks = document.querySelectorAll('input[type="checkbox"]');
+        const checked = Array.from(dayChecks).filter(c => c.checked).length;
+        const perc = dayChecks.length > 0 ? (checked / dayChecks.length) * 100 : 0;
+        document.getElementById('overallProgress').style.width = perc + '%';
     }
 
-    // --- TIMER LOGIC ---
-    let timerInterval;
-    let secondsLeft = 90;
-    let isRunning = false;
+    function clearAllData() {
+        if(confirm("Are you sure? This will permanently delete all weights, reps, and notes for the week.")) {
+            localStorage.removeItem('profit_data_v2');
+            userSettings = {};
+            renderWorkout(currentDay);
+            updateOverallProgress();
+        }
+    }
 
+    let timerInterval, secondsLeft = 90, isRunning = false;
     function updateTimerDisplay() {
         const mins = Math.floor(secondsLeft / 60);
         const secs = secondsLeft % 60;
-        document.getElementById('timerDisplay').innerText = 
-            `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        document.getElementById('timerDisplay').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-
-    function setTimer(secs) {
-        clearInterval(timerInterval);
-        isRunning = false;
-        secondsLeft = secs;
-        document.getElementById('timerControl').innerText = "START";
-        updateTimerDisplay();
-    }
-
+    function setTimer(secs) { clearInterval(timerInterval); isRunning = false; secondsLeft = secs; document.getElementById('timerControl').innerText = "START"; updateTimerDisplay(); }
     function toggleTimer() {
-        if (isRunning) {
-            clearInterval(timerInterval);
-            document.getElementById('timerControl').innerText = "RESUME";
-        } else {
+        if (isRunning) { clearInterval(timerInterval); document.getElementById('timerControl').innerText = "RESUME"; } 
+        else {
             document.getElementById('timerControl').innerText = "PAUSE";
             timerInterval = setInterval(() => {
-                secondsLeft--;
-                updateTimerDisplay();
-                if (secondsLeft <= 0) {
-                    clearInterval(timerInterval);
-                    alert("Rest time is over! Back to work.");
-                    resetTimer();
-                }
+                secondsLeft--; updateTimerDisplay();
+                if (secondsLeft <= 0) { clearInterval(timerInterval); alert("Rest over! Get back to your set."); resetTimer(); }
             }, 1000);
         }
         isRunning = !isRunning;
     }
+    function resetTimer() { clearInterval(timerInterval); isRunning = false; secondsLeft = 90; document.getElementById('timerControl').innerText = "START"; updateTimerDisplay(); }
 
-    function resetTimer() {
-        clearInterval(timerInterval);
-        isRunning = false;
-        secondsLeft = 90;
-        document.getElementById('timerControl').innerText = "START";
-        updateTimerDisplay();
-    }
-
-    // Boot app
     init();
-
 </script>
 </body>
 </html>
